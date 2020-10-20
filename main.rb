@@ -48,7 +48,7 @@ end
 
 build_output_folder = File.join(gradlew_folder_path,"#{ac_module}/build/outputs/apk/androidTest")
 
-command = "cd #{gradlew_folder_path} && chmod +x ./gradlew && ./gradlew clean #{ac_module}:assembleAndroidTest"
+command = "cd #{gradlew_folder_path} && chmod +x ./gradlew && ./gradlew clean #{ac_module}:assembleDebug #{ac_module}:assembleAndroidTest"
 run_command(command)
 
 puts "Filtering artifacts: #{build_output_folder}/**/*.apk"
