@@ -21,6 +21,11 @@ inputs:
   description: "Specifies the project module for build."
   helpText:
 outputs:
+- key: "AC_APK_PATH"
+  title: "APK Path"
+  defaultValue: "AC_APK_PATH"
+  description: "Path of the generated apk file."
+  helpText:
 - key: "AC_TEST_APK_PATH"
   title: "Test APK Path"
   defaultValue: "AC_TEST_APK_PATH"

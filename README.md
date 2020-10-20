@@ -10,4 +10,5 @@ Optional Input Variables
 - `$AC_PROJECT_PATH`: Specifies the project path
 
 Output Variables
-- `$AC_TEST_APK_PATH`: Path for the generated .apk file
+- `$AC_APK_PATH`: Path for the generated .apk file
+- `$AC_TEST_APK_PATH`: Path for the generated *androidTest.apk file
