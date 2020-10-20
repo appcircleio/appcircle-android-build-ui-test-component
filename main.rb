@@ -46,21 +46,29 @@ else
     gradlew_folder_path = File.expand_path(File.join(ac_repo_path, ac_project_path))
 end
 
-build_output_folder = File.join(gradlew_folder_path,"#{ac_module}/build/outputs/apk/androidTest")
+build_output_folder = File.join(gradlew_folder_path,"#{ac_module}/build/outputs/apk")
 
 command = "cd #{gradlew_folder_path} && chmod +x ./gradlew && ./gradlew clean #{ac_module}:assembleDebug #{ac_module}:assembleAndroidTest"
 run_command(command)
 
-puts "Filtering artifacts: #{build_output_folder}/**/*.apk"
+puts "Filtering artifacts: #{build_output_folder}/androidTest/**/*.apk"
+puts "Filtering artifacts: #{build_output_folder}/debug/**/*.apk"
 
-apks = Dir.glob("#{build_output_folder}/**/*.apk")
+test_apks = Dir.glob("#{build_output_folder}/androidTest/**/*.apk")
+apks = Dir.glob("#{build_output_folder}/debug/**/*.apk")
+
 FileUtils.cp apks, "#{ac_output_folder}"
 apks = Dir.glob("#{ac_output_folder}/**/*.apk").join("|")
 
-puts "Exporting AC_TEST_APK_PATH=#{apks}"
+FileUtils.cp test_apks, "#{ac_output_folder}"
+test_apks = Dir.glob("#{ac_output_folder}/**/*androidTest.apk").join("|")
+
+puts "Exporting AC_TEST_APK_PATH=#{test_apks}"
+puts "Exporting AC_APK_PATH=#{apks}"
 
 open(ENV['AC_ENV_FILE_PATH'], 'a') { |f|
-    f.puts "AC_TEST_APK_PATH=#{apks}"
+    f.puts "AC_TEST_APK_PATH=#{test_apks}"
+    f.puts "AC_APK_PATH=#{apks}"
 }
 
 exit 0
