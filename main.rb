@@ -41,6 +41,7 @@ puts "Filtering artifacts: #{build_output_folder}/**/debug/**/*.apk"
 
 test_apks = Dir.glob("#{build_output_folder}/androidTest/**/*.apk")
 apks = Dir.glob("#{build_output_folder}/**/debug/**/*.apk")
+apks = apks - test_apks
 
 FileUtils.cp apks, "#{ac_output_folder}"
 apks = Dir.glob("#{ac_output_folder}/**/*.apk").join("|")
