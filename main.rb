@@ -37,10 +37,10 @@ command = "cd #{gradlew_folder_path} && chmod +x ./gradlew && ./gradlew clean #{
 run_command(command)
 
 puts "Filtering artifacts: #{build_output_folder}/androidTest/**/*.apk"
-puts "Filtering artifacts: #{build_output_folder}/debug/**/*.apk"
+puts "Filtering artifacts: #{build_output_folder}/**/debug/**/*.apk"
 
 test_apks = Dir.glob("#{build_output_folder}/androidTest/**/*.apk")
-apks = Dir.glob("#{build_output_folder}/debug/**/*.apk")
+apks = Dir.glob("#{build_output_folder}/**/debug/**/*.apk")
 
 FileUtils.cp apks, "#{ac_output_folder}"
 apks = Dir.glob("#{ac_output_folder}/**/*.apk").join("|")
